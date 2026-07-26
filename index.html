@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DriveEase — Car Rental</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      background: #f8f9fa;
+      line-height: 1.6;
+    }
+    header {
+      background: #1a1a2e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      color: #e94560;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    nav a {
+      color: #eaeaea;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #e94560; }
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #e94560; font-weight: 700; }
+    .hero p {
+      font-size: 1.15rem;
+      color: #b8c5d6;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .btn-primary { background: #e94560; color: #fff; }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #e94560;
+      margin-left: 1rem;
+    }
+    .features {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .feature-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .feature-card p { color: #7f8c8d; font-size: 0.9rem; }
+    .cta {
+      background: #fff;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid #ecf0f1;
+    }
+    .cta h2 { font-size: 1.8rem; font-weight: 300; margin-bottom: 1rem; }
+    .cta p { color: #7f8c8d; margin-bottom: 2rem; }
+    footer {
+      background: #1a1a2e;
+      color: #7f8c8d;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">DriveEase</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Book Now</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Drive Your <span>Dream</span> Car Today</h1>
+    <p>Affordable, reliable car rentals for every journey. Sign in to browse our fleet and book your ride.</p>
+    <a href="login.html" class="btn btn-outline">Get Started</a>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">&#128663;</div>
+      <h3>Wide Selection</h3>
+      <p>From compact city cars to luxury SUVs, find the perfect vehicle for your needs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">&#128176;</div>
+      <h3>Best Prices</h3>
+      <p>Competitive daily rates with no hidden fees. Transparent pricing you can trust.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">&#128274;</div>
+      <h3>Secure Booking</h3>
+      <p>Easy online reservation with instant confirmation. Your ride is just a click away.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to hit the road?</h2>
+    <p>Sign in to start booking your next adventure.</p>
+    <a href="login.html" class="btn btn-primary">Sign In</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 DriveEase Car Rental. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

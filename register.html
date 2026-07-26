@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Booking — DriveEase</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      background: #f8f9fa;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #1a1a2e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      color: #e94560;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    nav a {
+      color: #eaeaea;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+    nav a:hover { color: #e94560; }
+    .booking-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+    .booking-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 480px;
+    }
+    .booking-card h1 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #1a1a2e;
+      margin-bottom: 0.3rem;
+    }
+    .booking-card .subtitle {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .car-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8f9fa;
+      border: 1px solid #ecf0f1;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .car-chip strong { color: #1a1a2e; }
+    .car-chip span {
+      color: #e94560;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.4rem;
+    }
+    input[type="date"],
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #dce1e6;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      font-family: inherit;
+    }
+    input:focus {
+      outline: none;
+      border-color: #e94560;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.85rem;
+      background: #e94560;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      font-family: inherit;
+    }
+    .btn:hover { background: #d63851; }
+    .form-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    .form-footer a {
+      color: #e94560;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .form-footer a:hover { text-decoration: underline; }
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .confirmation.show { display: block; }
+    .confirmation .check {
+      width: 64px;
+      height: 64px;
+      background: #e8f8ef;
+      color: #27ae60;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.2rem;
+    }
+    .confirmation h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .confirmation p {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .booking-summary {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-size: 0.88rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+    .booking-summary div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid #ecf0f1;
+    }
+    .booking-summary div:last-child { border-bottom: none; }
+    .booking-summary span:first-child { color: #7f8c8d; }
+    .booking-summary span:last-child { font-weight: 600; color: #1a1a2e; }
+    .confirmation .btn-link {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #1a1a2e;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .confirmation .btn-link:hover { background: #e94560; }
+    .form-hidden { display: none; }
+    .error-msg {
+      color: #e94560;
+      font-size: 0.85rem;
+      margin: -0.8rem 0 1rem;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+    footer {
+      background: #1a1a2e;
+      color: #7f8c8d;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">DriveEase</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Book Now</a>
+    </nav>
+  </header>
+
+  <div class="booking-wrapper">
+    <div class="booking-card">
+      <h1>Confirm Your Booking</h1>
+      <p class="subtitle">Tell us when and where, and we'll get your car ready</p>
+
+      <div id="car-chip" class="car-chip" style="display:none;">
+        <span id="car-chip-name"><strong></strong></span>
+        <span>SELECTED CAR</span>
+      </div>
+
+      <form id="booking-form" action="#" method="post">
+        <div class="form-row">
+          <div>
+            <label for="pickup-date">Pickup Date</label>
+            <input type="date" id="pickup-date" name="pickup-date" required>
+          </div>
+          <div>
+            <label for="return-date">Return Date</label>
+            <input type="date" id="return-date" name="return-date" required>
+          </div>
+        </div>
+        <p id="date-error" class="error-msg">Return date must be after the pickup date.</p>
+
+        <label for="pickup-location">Pickup Location</label>
+        <input type="text" id="pickup-location" name="pickup-location" placeholder="e.g. Andheri, Mumbai" required>
+
+        <label for="dropoff-location">Drop-off Location</label>
+        <input type="text" id="dropoff-location" name="dropoff-location" placeholder="e.g. Bandra, Mumbai" required>
+
+        <button type="submit" class="btn">Confirm Booking</button>
+      </form>
+
+      <div id="booking-confirmation" class="confirmation">
+        <div class="check">&#10003;</div>
+        <h2>Booking Confirmed</h2>
+        <p id="booking-message">Your car is reserved. Here are the details:</p>
+
+        <div class="booking-summary">
+          <div><span>Car</span><span id="summary-car">—</span></div>
+          <div><span>Pickup</span><span id="summary-pickup-date">—</span></div>
+          <div><span>Return</span><span id="summary-return-date">—</span></div>
+          <div><span>Pickup Location</span><span id="summary-pickup-loc">—</span></div>
+          <div><span>Drop-off Location</span><span id="summary-dropoff-loc">—</span></div>
+        </div>
+
+        <a href="catalogue.html" class="btn-link">Browse More Cars</a>
+      </div>
+
+      <p class="form-footer" id="booking-footer">
+        Changed your mind? <a href="catalogue.html">Back to Catalogue</a>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 DriveEase Car Rental. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Booking requires a signed-in session, same as the catalogue
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // Pick up the car name passed from the catalogue's "Rent Now" button
+    var params = new URLSearchParams(window.location.search);
+    var carName = params.get('car') || 'Any available car';
+
+    var chip = document.getElementById('car-chip');
+    var chipName = document.getElementById('car-chip-name');
+    if (params.get('car')) {
+      chipName.innerHTML = '<strong>' + carName + '</strong>';
+      chip.style.display = 'flex';
+    }
+
+    function formatDate(value) {
+      if (!value) return '—';
+      var d = new Date(value + 'T00:00:00');
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    document.getElementById('booking-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var pickupDate = document.getElementById('pickup-date').value;
+      var returnDate = document.getElementById('return-date').value;
+      var errorEl = document.getElementById('date-error');
+
+      if (returnDate <= pickupDate) {
+        errorEl.classList.add('show');
+        return;
+      }
+      errorEl.classList.remove('show');
+
+      var pickupLoc = document.getElementById('pickup-location').value;
+      var dropoffLoc = document.getElementById('dropoff-location').value;
+
+      document.getElementById('summary-car').textContent = carName;
+      document.getElementById('summary-pickup-date').textContent = formatDate(pickupDate);
+      document.getElementById('summary-return-date').textContent = formatDate(returnDate);
+      document.getElementById('summary-pickup-loc').textContent = pickupLoc;
+      document.getElementById('summary-dropoff-loc').textContent = dropoffLoc;
+
+      this.classList.add('form-hidden');
+      document.getElementById('booking-footer').classList.add('form-hidden');
+      document.getElementById('booking-confirmation').classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
